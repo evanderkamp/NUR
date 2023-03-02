@@ -29,11 +29,11 @@ def Poisson(l, k):
 ls = np.array([1,5,3,2.6,101])
 ks = np.array([0,10,21,40,200])
 
-lst = np.array([1,5,6,7,3,2.6,101])
-kst = np.array([1,10,11,12,13,18,20])
 
+Poissout = Poisson(ls, ks)
 
-print(Poisson(ls, ks))
+#save the output as a txt file
+np.savetxt("NUR1_Poisson.txt", np.transpose(ls,ks,Poissout))
 
 
 
