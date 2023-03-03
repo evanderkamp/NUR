@@ -7,6 +7,7 @@ import timeit
 #exercise 2
 
 #functions for row swapping, adding, and scaling
+#I made the functions together with my sister Liz van der Kamp (s2135752) during the working classes
 
 def rowswap(M, i, j):
 	"""swap row i and j of matrix M"""
@@ -123,7 +124,7 @@ y=data[:,1]
 xint=np.linspace(x[0],x[-1],1001) #x values to interpolate at
 
 #vandermonde matrix:
-VM = np.zeros((len(x),len(x)))
+VM = np.empty((len(x),len(x)))
 for i in range(len(x)):
 	VM[:,i] = x**i
 
@@ -137,19 +138,19 @@ print("Solution for c: ", c)
 np.savetxt("NUR1_c_sol1.txt", c)
 
 #get the y values for the interpolated x
-yint = np.zeros(len(xint))
-ysol = np.zeros(len(x))
-for k in range(len(x)):
-	yint += c[k]*xint**k
-	#same length as data to compare yi and y(x)
-	ysol += c[k]*x**k
+
+xint_power = [xint**k for k in range(len(x))]
+x_power = [x**k for k in range(len(x))]
+
+yint = np.sum(c[:,None]*xint_power, axis=0)
+ysol = np.sum(c[:,None]*x_power, axis=0)
 
 
 
 #plot the results
-fig,(ax1,ax2) = plt.subplots(2, figsize=(5,15), sharex=True)
+fig,(ax1,ax2) = plt.subplots(2, figsize=(10,5), sharex=True)
 ax1.scatter(x,y, label="data points")
-ax1.plot(xint,yint, label="interpolated polynomial", color='crimson')
+ax1.plot(xint,yint, label="interpolated polynomial (LU)", color='crimson')
 ax1.set_ylabel("y")
 ax1.set_ylim(-400,400)
 ax1.legend()
@@ -217,7 +218,7 @@ y_Neville = polinterp(xint, x, y)
 #also interpolate so we have a set at the data points of the same size
 y_comp = polinterp(x, x, y)
 
-fig,(ax1,ax2) = plt.subplots(2, figsize=(5,15), sharex=True)
+fig,(ax1,ax2) = plt.subplots(2, figsize=(10,5), sharex=True)
 ax1.scatter(x,y, label="data points")
 ax1.plot(xint,yint, label="interpolated polynomial (LU)", color='crimson')
 ax1.plot(xint,y_Neville, label="interpolated polynomial (Neville)", color='black')
@@ -243,9 +244,6 @@ plt.close()
 
 #2c
 
-#The difference between Vc and y
-
-
 
 
 def LUiteration(M, LU, x, b, index, iters):
@@ -256,12 +254,12 @@ def LUiteration(M, LU, x, b, index, iters):
 	x_iter = x.copy()
 	rows = M.shape[0]
 	
-
+	
 	for i in range(iters):
-		#print(i, x_iter)
+		#sum with axis=1 gives matrix multiplication
 		del_b = np.sum(M*x_iter, axis=1) - b
 
-	#get the solution for x_end (deltax)
+	#get the solution for x_end (deltax, the error in the solution)
 		x_end = np.zeros(rows)
 		y_end = np.zeros(rows)
 
@@ -278,7 +276,7 @@ def LUiteration(M, LU, x, b, index, iters):
 			for q in range(back,rows):
 				ax += LU[back,q]*x_end[q]
 			x_end[back] = (1/LU[back,back]) * (y_end[back] -ax)
-
+	#substract the error
 		x_iter -= x_end
 	
 	#return the index vector so we know what we swapped
@@ -292,16 +290,12 @@ print("10x iterated solution for c:", c_improv)
 np.savetxt("NUR1_c_sol10.txt", c_improv)
 
 
-yint10 = np.zeros(len(xint))
-ysol10 = np.zeros(len(x))
 
-for k in range(len(x)):
-	yint10 += c_improv[k]*xint**k
-	#same length as data to compare yi and y(x)
-	ysol10 += c_improv[k]*x**k
+yint10 = np.sum(c_improv[:,None]*xint_power, axis=0)
+ysol10 = np.sum(c_improv[:,None]*x_power, axis=0)
 
 
-fig,(ax1,ax2) = plt.subplots(2, figsize=(5,15), sharex=True)
+fig,(ax1,ax2) = plt.subplots(2, figsize=(10,5), sharex=True)
 ax1.scatter(x,y, label="data points")
 ax1.plot(xint,yint, label="interpolated polynomial (LU1)", color='crimson')
 ax1.plot(xint,yint10, label="interpolated polynomial (LU10)", color='black')

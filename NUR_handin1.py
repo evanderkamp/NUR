@@ -19,7 +19,7 @@ def Poisson(l, k):
 		if k[i] > 20:
 			logk_fact = np.sum(np.log(np.linspace(1,k[i],k[i])))
 			logP = np.float32((np.log(l[i])*k[i]  -l[i]) - logk_fact)
-			Pois[i] = np.exp(logP)
+			Pois[i] = np.exp(logP, dtype=np.float32)
 		else:
 			Pois[i] = np.float32(l[i]**k[i] * np.exp(-l[i]) / np.math.factorial(k[i]))
 		
@@ -33,7 +33,7 @@ ks = np.array([0,10,21,40,200])
 Poissout = Poisson(ls, ks)
 
 #save the output as a txt file
-np.savetxt("NUR1_Poisson.txt", np.transpose(ls,ks,Poissout))
+np.savetxt("NUR1_Poisson.txt", np.transpose([ls,ks,Poissout]))
 
 
 
