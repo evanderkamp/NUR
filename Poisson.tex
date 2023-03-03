@@ -3,7 +3,7 @@
 I made a Poisson dsitribution function which works for 32 bits inputs by splitting it in two regimes.
 If $k < 20$, I just use the formula $P_\lambda(k) = \frac{\lambda^k e{-\lambda}}{k!}$.
 If $k > 20$, the factorial overflows, so then I go to logspace and split the factorial into a sum: 
-$\ln(k!) = \sum_{i=1}^{k} \ln(i)$, and then first calculate $\ln P_\lambda(k) = \ln(\lambda) * k - \ln(k!)$ before taking the exponent of it and returning that. 
+$\ln(k!) = \sum_{i=1}^{k} \ln(i)$, and then first calculate $\ln P_\lambda(k) = \ln(\lambda) * k - \lambda - \ln(k!)$ before taking the exponent of it and returning that. 
 
 The code I wrote is:
 \lstinputlisting{NUR_handin1.py}
