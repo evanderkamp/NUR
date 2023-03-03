@@ -345,7 +345,7 @@ aver_tc = (timeit.default_timer() - starttime_c)/number
 print("The average time taken to do improve LU solution 10x (2c) :", aver_tc)
 
 
-#The LU decomposition is and improving it 10x take about the same time, which is both more than 10x faster than Neville's algorithm, so doing the LU decomposition + improvement is most efficient because for Neville you have to do bisection for every point and then interpolate and iterate many times, which is slow if you want to do it for many points
+#The LU decomposition and improving it 10x take about the same time, which is both more than 10x faster than Neville's algorithm, so doing the LU decomposition + improvement is most efficient because for Neville you have to do bisection for every point and then interpolate and iterate many times, which is slow if you want to do it for many points
 #LU decomposition just uses 1 matrix you have to calculate once and thus improving the solution is efficient because you can use the same matrix every time
 #From the plots, Neville's algorithm yields the most accurate solution because it already iterates a lot of times to more precisely calculate the polynomial
 
