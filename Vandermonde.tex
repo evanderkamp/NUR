@@ -45,7 +45,7 @@ This makes sense because Neville\'s algorithm already improves it by iterating o
 
 \subsection{c}
 To improve the result from (a), I take the part of my LU decomposition code with uses the LU matrix to solve for the answer, and make a function which takes the matrix M, the LU decomposition of M, x and b such that Mx = b, the index array containing which rows were swapped, and the number of iterations.
-Then, the function takes del\_b = Mx - b = del\_x, and solves to get del\_x, which I substract from our initial x to get a new estimate, which I then use to get a new del_b and del\_x to improve the solution again, and that repeats the number of times given by "iter". 
+Then, the function takes del\_b = Mx - b = del\_x, and solves to get del\_x, which I substract from our initial x to get a new estimate, which I then use to get a new del\_b and del\_x to improve the solution again, and that repeats the number of times given by "iter". 
 The improved solution for c is: 
 \lstinputlisting{NUR1_c_sol10.txt}
 I plot this result compared to the 1 time iterated solution from (a) and plot the absolute difference again, see Fig. \ref{fig:fig3}. You can see that the absolute difference has reduced a lot compared to (a), except for at the end points.
