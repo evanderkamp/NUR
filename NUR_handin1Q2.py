@@ -139,8 +139,8 @@ np.savetxt("NUR1_c_sol1.txt", c)
 
 #get the y values for the interpolated x
 
-xint_power = [xint**k for k in range(len(x))]
-x_power = [x**k for k in range(len(x))]
+xint_power = [xint**k for k in range(len(c))]
+x_power = [x**k for k in range(len(c))]
 
 yint = np.sum(c[:,None]*xint_power, axis=0)
 ysol = np.sum(c[:,None]*x_power, axis=0)
