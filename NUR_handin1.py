@@ -33,7 +33,7 @@ ks = np.array([0,10,21,40,200])
 Poissout = Poisson(ls, ks)
 
 #save the output as a txt file
-np.savetxt("NUR1_Poisson.txt", np.transpose([ls,ks,Poissout]))
+np.savetxt("NUR1Poisson.txt", np.transpose([ls,ks,Poissout]))
 
 
 

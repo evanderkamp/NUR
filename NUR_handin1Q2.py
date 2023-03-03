@@ -135,7 +135,7 @@ LUm, c, indexs = LUdecomp(VM, y)
 print("Solution for c: ", c)
 
 #save the output as a txt file
-np.savetxt("NUR1_c_sol1.txt", c)
+np.savetxt("NUR1csol1.txt", c)
 
 #get the y values for the interpolated x
 
@@ -287,7 +287,7 @@ c_improv = LUiteration(VM, LUm, c, y, indexs, iters=10)
 
 print("10x iterated solution for c:", c_improv)
 #save the output as a txt file
-np.savetxt("NUR1_c_sol10.txt", c_improv)
+np.savetxt("NUR1csol10.txt", c_improv)
 
 
 
@@ -349,6 +349,6 @@ print("The average time taken to do improve LU solution 10x (2c) :", aver_tc)
 #LU decomposition just uses 1 matrix you have to calculate once and thus improving the solution is efficient because you can use the same matrix every time
 #From the plots, Neville's algorithm yields the most accurate solution because it already iterates a lot of times to more precisely calculate the polynomial
 
-np.savetxt("NUR1_Q2_avertimes.txt", [aver_ta, aver_tb, aver_tc])
+np.savetxt("NUR1Q2avertimes.txt", [aver_ta, aver_tb, aver_tc])
 
 
